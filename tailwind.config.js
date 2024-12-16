@@ -9,6 +9,9 @@ module.exports = {
       colors: {
         wrapper: "#F6EEE0",
       },
+      boxShadow: {
+        "3xl": "8px 0px 20px 4px rgba(0,0,0,0.2)",
+      },
     },
   },
   plugins: [],
