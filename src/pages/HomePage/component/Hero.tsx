@@ -121,36 +121,6 @@ const Hero = () => {
           </div>
         </div>
       </section>
-
-      <section className="bg-[#ffffff] ">
-        <div className="container mx-auto px-6 py-12 md:py-16 ">
-          <div className="flex flex-col mt-20  items-center justify-center md:mt-36 md:gap-6  md:flex-row ">
-            <div className="w-full md:w-1/2 space-y-10 text-center md:text-left">
-              <h1 className="text-4xl  font-semibold font-poppins leading-tight text-gray-900  md:text-5xl xl:text-5xl 2xl:text-6xl">
-                Discover <span className="text-orange-600">Your</span>
-                <br />
-                Favorite <span className="text-orange-600">Book</span>
-                <br />
-                From <span className="text-orange-600">Here</span>
-              </h1>
-              <button className="bg-[#F16529] hover:bg-[#D8541F] text-white font-medium px-6 py-3 rounded-md">
-                Explore Our Library
-              </button>
-            </div>
-
-            <div className="relative w-full md:w-1/2 mt-10 md:mt-0 flex items-center justify-start">
-              <div className="relative z-10">
-                <img
-                  src={HeroSideImage}
-                  alt="Reading a book"
-                  className="shadow-lg min-w-52 md:w-72  lg:w-80 xl:w-80 2xl:w-96"
-                />
-                <div className=" hidden absolute w-48 h-48 md:w-80 md:h-80 bg-[#F16529] rounded-full -right-10 top-10 md:-right-20 md:top-12 -z-10 md:block"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 };
