@@ -47,7 +47,7 @@ const BookCollection = () => {
   ];
   return (
     <section className=" bg-white">
-      <div className="py-20 overflow-hidden">
+      <div className="py-16 overflow-hidden md:py-24">
         <div className="container mx-auto ">
           <motion.h2
             initial={{
@@ -60,7 +60,7 @@ const BookCollection = () => {
               ease: "easeInOut",
             }}
             viewport={{ once: true }}
-            className="text-3xl text-center text-gray-900 font-kumbh font-bold mb-4 md:text-4xl xl:text-5xl"
+            className="text-3xl text-center text-gray-900 font-poppins font-bold mb-4 md:text-4xl xl:text-5xl"
           >
             Browse Our <span className="text-orange-600">Collection</span>
           </motion.h2>
