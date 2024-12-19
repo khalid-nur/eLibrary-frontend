@@ -61,7 +61,6 @@ const WhyChooseUs = () => {
   return (
     <section className="py-16 bg-wrapper md:py-24">
       <div className="container mx-auto">
-        {/* Header */}
         <motion.h1
           initial={{
             y: 40,
@@ -78,9 +77,7 @@ const WhyChooseUs = () => {
           Why Choose Us?
         </motion.h1>
 
-        {/* Main Content */}
         <div className="flex flex-col justify-center px-6 gap-6 lg:flex-row">
-          {/* Left Side: What We Offer */}
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -117,7 +114,6 @@ const WhyChooseUs = () => {
             </div>
           </motion.div>
 
-          {/* Right Side: eLibrary Availability */}
           <div className="lg:w p-4 flex flex-col">
             <h2 className="text-2xl text-center font-poppins font-bold mb-6 md:mb-8">
               <span className="relative after:content-link2 after:absolute after:-bottom-1 after:-right-6 ">
