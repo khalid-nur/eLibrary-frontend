@@ -3,6 +3,7 @@ import NavBar from "./component/NavBar";
 import Hero from "./component/Hero";
 import BookCollection from "./component/BookCollection";
 import WhyChooseUs from "./component/WhyChooseUs";
+import HowItWorks from "./component/HowItWorks";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Hero />
       <BookCollection />
       <WhyChooseUs />
+      <HowItWorks />
     </>
   );
 };
