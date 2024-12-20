@@ -4,6 +4,7 @@ import Hero from "./component/Hero";
 import BookCollection from "./component/BookCollection";
 import WhyChooseUs from "./component/WhyChooseUs";
 import HowItWorks from "./component/HowItWorks";
+import AboutUs from "./component/AboutUs";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <BookCollection />
       <WhyChooseUs />
       <HowItWorks />
+      <AboutUs />
     </>
   );
 };
