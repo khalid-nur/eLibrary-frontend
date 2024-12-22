@@ -1,6 +1,7 @@
 import elibraryLogo from "../../../assets/elibrary_logo.png";
 import { MdMenu, MdClose } from "react-icons/md";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { navVariants, menuVariants } from "../../../utils/animation";
 import { useState } from "react";
 
 const NavBar = () => {
@@ -19,24 +20,6 @@ const NavBar = () => {
       setHidden(false);
     }
   });
-
-  const navVariants = {
-    visible: { y: 0, transition: { duration: 0.35, ease: "easeInOut" } },
-    hidden: { y: "-100%", transition: { duration: 0.35, ease: "easeInOut" } },
-  };
-
-  const menuVariants = {
-    open: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.3, ease: "easeInOut" },
-    },
-    closed: {
-      y: "-100%",
-      opacity: 0,
-      transition: { duration: 0.3, ease: "easeInOut" },
-    },
-  };
 
   return (
     <div>

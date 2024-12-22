@@ -1,25 +1,9 @@
 import { motion } from "framer-motion";
 import PersonLaptop from "../../../assets/pretty-woman-working-her-home-office-smiling-end-enjoying-time-her-living-room.jpg";
+import { circleVariants } from "../../../utils/animation";
+import { steps } from "../../../constants/howItWorksData";
 
 const HowItWorks = () => {
-  const steps = [
-    {
-      title: "Create an Account",
-      description:
-        "Sign up in minutes to get full access to our library and start browsing.",
-    },
-    {
-      title: "Explore & Select",
-      description:
-        "Browse a diverse selection of books and easily select your preferred titles with a single click.",
-    },
-    {
-      title: "Read & Return",
-      description:
-        "Start reading instantly on any device, then return the book with one click when you're done.",
-    },
-  ];
-
   const totalCircles = 42;
 
   return (
@@ -52,20 +36,13 @@ const HowItWorks = () => {
             <div className="flex justify-between items-center mx-auto max-w-[70%] h-1">
               {[...Array(totalCircles)].map((_, index) => (
                 <motion.div
+                  variants={circleVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  custom={index}
+                  viewport={{ once: true }}
                   key={index}
                   className="w-1.5 h-1.5 rounded-full"
-                  initial={{
-                    backgroundColor: "#d6d6d6",
-                    borderColor: "#d6d6d6",
-                  }}
-                  whileInView={{
-                    backgroundColor: "#F97316",
-                    borderColor: "#F97316",
-                  }}
-                  transition={{
-                    delay: index * 0.1,
-                  }}
-                  viewport={{ once: true }}
                 ></motion.div>
               ))}
             </div>
@@ -74,11 +51,11 @@ const HowItWorks = () => {
           <div className="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
             {steps.map((step, index) => (
               <div key={index}>
-                <motion.div className="flex items-center justify-center w-14 h-14 mx-auto bg-white border-2 border-gray-300 rounded-full shadow">
+                <div className="flex items-center justify-center w-14 h-14 mx-auto bg-white border-2 border-gray-300 rounded-full shadow">
                   <span className="text-xl font-semibold text-gray-600">
                     {index + 1}
                   </span>
-                </motion.div>
+                </div>
                 <div className="mt-6  md:mt-10">
                   <h3 className="text-xl font-poppins font-semibold leading-tight text-gray-900 ">
                     {step.title}

@@ -1,23 +1,24 @@
-import { animate, motion, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import ColleaguesImage from "../../../assets/university-colleagues-posing-university.jpg";
 import DotPatterns from "../../../assets/dots-pattern.svg";
 import { GiWorld } from "react-icons/gi";
+import { useCounter, titleVariants } from "../../../utils/animation";
 
 const AboutUs = () => {
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, Math.round);
-
-  const startAnimation = () => {
-    const animation = animate(count, 2940, { duration: 5 });
-    return () => animation.stop();
-  };
+  const { rounded, startAnimation } = useCounter();
 
   return (
     <section className="py-16 bg-wrapper md:py-24">
       <div className="container px-4 mx-auto sm:px-6 lg:px-8">
-        <h2 className="text-3xl text-center text-gray-900 font-poppins font-bold  mb-12  md:text-4xl xl:text-5xl">
+        <motion.h2
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-3xl text-center text-gray-900 font-poppins font-bold  mb-12  md:text-4xl xl:text-5xl"
+        >
           About <span className="text-orange-600">Us</span>
-        </h2>
+        </motion.h2>
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="relative  md:w-1/2 md:order-2">
             <img
