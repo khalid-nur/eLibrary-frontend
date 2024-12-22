@@ -1,24 +1,16 @@
 import HeroSideImage from "../../../assets/hero_section_book_discovery.png.jpg";
 import GrainBg from "../../../assets/grain_texture.jpg";
 import { HiMiniArrowSmallRight } from "react-icons/hi2";
+import {
+  slideRight,
+  heroButtonAnimation,
+  heroIconBounceAnimation,
+  circleAnimations,
+} from "../../../utils/animation";
+
 import { motion } from "framer-motion";
 
 const Hero = () => {
-  const slideRight = {
-    hidden: {
-      opacity: 0,
-      x: -100,
-    },
-    visitable: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 1,
-        delay: 1,
-      },
-    },
-  };
-
   return (
     <>
       <section className="bg-wrapper ">
@@ -38,24 +30,16 @@ const Hero = () => {
                 From <span className="text-orange-600">Here</span>
               </motion.h1>
               <motion.div
-                initial={{ y: -50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  duration: 0.5,
-                  delay: 2,
-                }}
+                variants={heroButtonAnimation}
+                initial="hidden"
+                animate="visitable"
               >
                 <button className="relative flex items-center gap-2  px-5 py-3   rounded-2xl border border-orange-500 bg-orange-500 text-white text-base font-semibold shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-16 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-1000 hover:before:-translate-x-64 overflow-hidden 2xl:text-lg ">
                   Explore Our Library
                   <motion.div
-                    initial={{ x: 5 }}
-                    animate={{ x: 10 }}
-                    transition={{
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      duration: 1,
-                      repeatType: "mirror",
-                    }}
+                    variants={heroIconBounceAnimation}
+                    initial="hidden"
+                    animate="visitable"
                   >
                     <HiMiniArrowSmallRight className="size-8" />
                   </motion.div>
@@ -73,12 +57,10 @@ const Hero = () => {
                 />
 
                 <motion.div
-                  initial={{
-                    x: -55,
-                    opacity: 0,
-                  }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 2.5, duration: 0.3, ease: "easeInOut" }}
+                  variants={circleAnimations.backCircle}
+                  initial="initial"
+                  animate="animate"
+                  transition={circleAnimations.backCircle.transition}
                   className="Circle hidden absolute  rounded-full md:w-80 md:h-80 bg-orange-600 md:-right-20 md:top-16 -z-10 md:block  xl:w-96 xl:h-96 xl:-right-40 xl:top-14 2xl:w-[30rem] 2xl:h-[30rem] 2xl:-right-48 2xl:top-14 "
                 >
                   <div
@@ -88,12 +70,10 @@ const Hero = () => {
                 </motion.div>
 
                 <motion.div
-                  initial={{
-                    x: -145,
-                    opacity: 0,
-                  }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 3.5, duration: 0.3, ease: "easeInOut" }}
+                  variants={circleAnimations.middleCircle}
+                  initial="initial"
+                  animate="animate"
+                  transition={circleAnimations.middleCircle.transition}
                   className="Circle hidden absolute shadow-3xl  bg-orange-600  rounded-full md:w-56 md:h-56 md:-right-14  md:top-28 -z-10 md:block  xl:w-80 xl:h-80 xl:-right-32 xl:top-24 2xl:w-[24rem] 2xl:h-[24rem] 2xl:-right-36 2xl:top-28  "
                 >
                   <div
@@ -103,12 +83,10 @@ const Hero = () => {
                 </motion.div>
 
                 <motion.div
-                  initial={{
-                    x: -95,
-                    opacity: 0,
-                  }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 4.5, duration: 0.3, ease: "easeInOut" }}
+                  variants={circleAnimations.frontCircle}
+                  initial="initial"
+                  animate="animate"
+                  transition={circleAnimations.frontCircle.transition}
                   className="Circle hidden absolute shadow-3xl bg-orange-600  rounded-full md:w-48 md:h-48 md:-right-8  md:top-32  -z-10 md:block  xl:w-64 xl:h-64 xl:-right-24 xl:top-32 2xl:w-[24rem] 2xl:h-80 2xl:-right-24 2xl:top-36  "
                 >
                   <div

@@ -1,76 +1,21 @@
-import { LuBookCopy, LuScrollText, LuMessageSquareText } from "react-icons/lu";
-import { PiBooks } from "react-icons/pi";
 import { motion } from "framer-motion";
 import Clock from "../../../assets/clock_16147727.png";
+import {
+  titleVariants,
+  staggerContainer,
+  itemVariants,
+  availabilityVariants,
+} from "../../../utils/animation";
+import { features } from "../../../constants/whyChooseUsData";
 
 const WhyChooseUs = () => {
-  const features = [
-    {
-      title: "Book Checkout",
-      description:
-        "Checking out books is quick and simple. Whether you’re after a thrilling mystery or a heartwarming novel, you can easily find and borrow your next read.",
-      icon: <LuBookCopy className="w-6 h-6 lg:w-8 lg:h-8 text-[#31A0FE]" />,
-      bgColor: "bg-[#D4EAF6]",
-    },
-    {
-      title: "Personal Shelf",
-      description:
-        "Keep track of all the books you’ve checked out with your own personal shelf. It’s your little space to see what you’ve been reading.",
-      icon: <PiBooks className="w-6 h-6 lg:w-8 lg:h-8 text-[#23856D]" />,
-      bgColor: "bg-[#D6F1CC]",
-    },
-    {
-      title: "Checkout History",
-      description:
-        "Look back at everything you’ve checked out. Perfect for remembering books you loved or re-reading an old favorite.",
-      icon: <LuScrollText className="w-6 h-6 lg:w-8 lg:h-8 text-[#EC5C2E]" />,
-      bgColor: "bg-[#F3DCD5]",
-    },
-    {
-      title: "Message Us",
-      description:
-        "We’re just a message away. Need recommendations or want to request a book? We’re here to help and make your experience easier.",
-      icon: (
-        <LuMessageSquareText className="w-6 h-6 lg:w-8 lg:h-8 text-[#a12f99]" />
-      ),
-      bgColor: "bg-[#d5a3d2]",
-    },
-  ];
-
-  const staggerContainer = {
-    hidden: { opacity: 1 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.6,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-      },
-    },
-  };
-
   return (
     <section className="py-16 bg-wrapper md:py-24">
       <div className="container mx-auto">
         <motion.h1
-          initial={{
-            y: 40,
-            opacity: 0,
-          }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{
-            duration: 1,
-            ease: "easeInOut",
-          }}
+          variants={titleVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
           className="text-3xl text-center text-gray-900 font-poppins font-bold mb-8 md:text-4xl xl:text-5xl "
         >
@@ -79,10 +24,10 @@ const WhyChooseUs = () => {
 
         <div className="flex flex-col justify-center px-6 gap-6 lg:flex-row">
           <motion.div
+            variants={staggerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
             className="lg:w-3/5 p-4"
           >
             <motion.h2 className=" text-2xl text-center font-poppins font-bold mb-6 md:mb-8">
@@ -122,15 +67,9 @@ const WhyChooseUs = () => {
             </h2>
             <motion.div className="p-3 shadow-lg bg-gray-900 rounded-lg  h-full   items-center flex-col justify-center ">
               <motion.div
-                initial={{
-                  opacity: 0,
-                }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{
-                  duration: 1,
-                  delay: 2,
-                  ease: "easeInOut",
-                }}
+                variants={availabilityVariants}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
                 className=" relative flex flex-col justify-between  lg:space-y-6  p-3 h-ful md:flex-row gap-6 lg:flex-col lg:max-w-72 z-0"
               >
