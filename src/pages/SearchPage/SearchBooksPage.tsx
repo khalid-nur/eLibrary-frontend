@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { bookCategories } from "../../constants/SearchPageData";
+import { useSearch } from "../../hooks/useBook";
 
 const SearchBooksPage = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const {
+    data: bookData,
+    error: bookError,
+    isLoading: isBookLoading,
+  } = useSearch(0, 5, searchQuery, selectedCategory);
+
+  const totalAmountOfBooks = bookData ? bookData.totalElements : 0;
 
   // Handles the submission for searching books
   const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,12 +42,12 @@ const SearchBooksPage = () => {
                         onClick={() => {
                           setSelectedCategory(category);
                           setSearchQuery("");
+                          setSearchInput("");
                         }}
                       >
                         <input
                           type="checkbox"
                           checked={selectedCategory === category}
-                          onChange={() => {}}
                           className="peer appearance-none h-2 w-2 bg-gray-600 transition-all duration-300 checked:bg-orange-500 checked:rotate-45 hover:rotate-45 hover:bg-orange-500"
                         />
                         <span className="peer-checked:text-orange-500">
@@ -51,8 +60,9 @@ const SearchBooksPage = () => {
                 <button
                   className="mt-4 text-orange-500 font-medium"
                   onClick={() => {
-                    setSelectedCategory("All");
+                    setSelectedCategory("");
                     setSearchQuery("");
+                    setSearchInput("");
                   }}
                 >
                   See All
@@ -86,41 +96,54 @@ const SearchBooksPage = () => {
 
               <p className="mb-6">
                 Result For
-                <span className="font-medium">
-                  "{searchInput || selectedCategory || "All"}
+                <span className="font-medium ml-1">
+                  "{searchInput || selectedCategory || "All"}"
                 </span>
-                "
               </p>
-              <p className="text-gray-600 text-sm mb-4">1 of 20 Book Found</p>
+
+              <p className="text-gray-600 text-sm mb-4">
+                1 of {totalAmountOfBooks} Book Found
+              </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[...Array(6)].map((_, index) => (
-                  <div
-                    key={index}
-                    className="border-2 p-4 rounded-lg shadow hover:shadow-xl transition-all duration-500 ease-in-out cursor-pointer hover:border-2 hover:border-orange-200 transform hover:-translate-y-2"
-                  >
-                    <div className="flex items-center space-x-4 mb-4">
-                      <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSyAWDgBed7X1tZqdarVFeSPCn6p-YAEXFGA&s"
-                        alt="Book Cover"
-                        className="w-28 h-44 object-cover rounded-md transition-all duration-500 ease-in-out"
-                      />
-                      <div>
-                        <h3 className="font-semibold text-lg">Book Title</h3>
-                        <p className="text-sm text-gray-500">By Book Author</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-600 text-sm line-clamp-4 mb-4">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                    <a
-                      href="/"
-                      className="text-base font-medium hover:opacity-70"
+                {totalAmountOfBooks > 0 ? (
+                  bookData?.content.map((book) => (
+                    <div
+                      key={book.id}
+                      className="border-2 p-4 rounded-lg shadow hover:shadow-xl transition-all duration-500 ease-in-out cursor-pointer hover:border-2 hover:border-orange-200 transform hover:-translate-y-2"
                     >
-                      View details
-                    </a>
+                      <div className="flex items-center space-x-4 mb-4">
+                        <img
+                          src={book.img}
+                          alt={`${book.title} Book Cover`}
+                          className="w-28 h-44 object-cover rounded-md transition-all duration-500 ease-in-out"
+                        />
+                        <div>
+                          <h3 className="font-semibold text-lg">
+                            {book.title}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            By {book.author}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-gray-600 text-sm line-clamp-4 mb-4">
+                        {book.description}
+                      </p>
+                      <a
+                        href="/"
+                        className="text-base font-medium hover:opacity-70"
+                      >
+                        View details
+                      </a>
+                    </div>
+                  ))
+                ) : (
+                  <div>
+                    {/* TODO: Display a better ui message */}
+                    <h3>Can't find what you are looking for?</h3>
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>
