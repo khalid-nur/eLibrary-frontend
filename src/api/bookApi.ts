@@ -15,3 +15,41 @@ export const getBooks = async (
 
   return response.data;
 };
+
+/**
+ * Fetches a paginated list of books filtered by title
+ * @param title The title of the books to search for
+ * @param page The page number for pagination
+ * @param size The number of books per page
+ * @returns A BookResponse object containing book data
+ */
+export const getBooksByTitle = async (
+  title: string,
+  page: number,
+  size: number
+): Promise<BookResponse> => {
+  const response = await apiClient.get(
+    `/books/search?title=${title}&page=${page}&size=${size}`
+  );
+
+  return response.data;
+};
+
+/**
+ * Fetches a paginated list of books filtered by category
+ * @param page The page number for pagination
+ * @param size The number of books per page
+ * @param category The category of books to search for
+ * @returns A BookResponse object containing book data
+ */
+export const getBooksByCategory = async (
+  page: number,
+  size: number,
+  category: string
+): Promise<BookResponse> => {
+  const response = await apiClient.get(
+    `/books/search/category?category=${category}&page=${page}&size=${size}`
+  );
+
+  return response.data;
+};
