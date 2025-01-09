@@ -1,25 +1,51 @@
 import React, { useState } from "react";
 import { bookCategories } from "../../constants/SearchPageData";
 import { useSearch } from "../../hooks/useBook";
+import Pagination from "./Pagination";
 
 const SearchBooksPage = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [booksPerPage] = useState<number>(5);
 
   const {
     data: bookData,
     error: bookError,
     isLoading: isBookLoading,
-  } = useSearch(0, 5, searchQuery, selectedCategory);
+  } = useSearch(currentPage - 1, booksPerPage, searchQuery, selectedCategory);
 
+  // Total number of books
   const totalAmountOfBooks = bookData ? bookData.totalElements : 0;
+
+  // Total number of pages
+  const totalPages = bookData ? bookData.totalPages : 0;
+
+  // Index of the last book on the current page
+  const indexOfLastBook = currentPage * booksPerPage;
+
+  // Index of the first book on the current page
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+
+  // The last book index displayed on the current page
+  const lastBookOnPage =
+    booksPerPage * currentPage <= totalAmountOfBooks
+      ? booksPerPage * currentPage // If the current page can display a full set of books, calculate the last book index
+      : totalAmountOfBooks; // If not, the last book index is the total number of books
 
   // Handles the submission for searching books
   const searchSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSelectedCategory("");
     setSearchQuery(searchInput);
+    setCurrentPage(1);
+  };
+
+  // Handles pagination
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -43,11 +69,13 @@ const SearchBooksPage = () => {
                           setSelectedCategory(category);
                           setSearchQuery("");
                           setSearchInput("");
+                          setCurrentPage(1);
                         }}
                       >
                         <input
                           type="checkbox"
                           checked={selectedCategory === category}
+                          readOnly
                           className="peer appearance-none h-2 w-2 bg-gray-600 transition-all duration-300 checked:bg-orange-500 checked:rotate-45 hover:rotate-45 hover:bg-orange-500"
                         />
                         <span className="peer-checked:text-orange-500">
@@ -63,6 +91,7 @@ const SearchBooksPage = () => {
                     setSelectedCategory("");
                     setSearchQuery("");
                     setSearchInput("");
+                    setCurrentPage(1);
                   }}
                 >
                   See All
@@ -102,7 +131,9 @@ const SearchBooksPage = () => {
               </p>
 
               <p className="text-gray-600 text-sm mb-4">
-                1 of {totalAmountOfBooks} Book Found
+                {indexOfFirstBook + 1} to {lastBookOnPage} of{" "}
+                {totalAmountOfBooks}
+                <span> Book Found</span>
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -150,6 +181,13 @@ const SearchBooksPage = () => {
         </div>
       </div>
       {/* TODO: Add pagination */}
+      <div className="container mx-auto px-6 py-4">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          paginate={paginate}
+        />
+      </div>
     </section>
   );
 };
