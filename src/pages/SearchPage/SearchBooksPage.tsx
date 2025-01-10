@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { bookCategories } from "../../constants/SearchPageData";
 import { useSearch } from "../../hooks/useBook";
 import Pagination from "./Pagination";
+import { PulseLoader } from "react-spinners";
+import BookCard from "./component/BookCard";
+import { SiAmazoncloudwatch } from "react-icons/si";
 
 const SearchBooksPage = () => {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -47,6 +50,15 @@ const SearchBooksPage = () => {
     setCurrentPage(pageNumber);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // Loading state spinner while fetching book data
+  if (isBookLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <PulseLoader size={12} />
+      </div>
+    );
+  }
 
   return (
     <section className="bg-white min-h-screen flex flex-col">
@@ -139,40 +151,19 @@ const SearchBooksPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {totalAmountOfBooks > 0 ? (
                   bookData?.content.map((book) => (
-                    <div
-                      key={book.id}
-                      className="border-2 p-4 rounded-lg shadow hover:shadow-xl transition-all duration-500 ease-in-out cursor-pointer hover:border-2 hover:border-orange-200 transform hover:-translate-y-2"
-                    >
-                      <div className="flex items-center space-x-4 mb-4">
-                        <img
-                          src={book.img}
-                          alt={`${book.title} Book Cover`}
-                          className="w-28 h-44 object-cover rounded-md transition-all duration-500 ease-in-out"
-                        />
-                        <div>
-                          <h3 className="font-semibold text-lg">
-                            {book.title}
-                          </h3>
-                          <p className="text-sm text-gray-500">
-                            By {book.author}
-                          </p>
-                        </div>
-                      </div>
-                      <p className="text-gray-600 text-sm line-clamp-4 mb-4">
-                        {book.description}
-                      </p>
-                      <a
-                        href="/"
-                        className="text-base font-medium hover:opacity-70"
-                      >
-                        View details
-                      </a>
-                    </div>
+                    <BookCard key={book.id} book={book} />
                   ))
                 ) : (
-                  <div>
-                    {/* TODO: Display a better ui message */}
-                    <h3>Can't find what you are looking for?</h3>
+                  <div className="flex flex-col items-center justify-center my-8 ">
+                    <SiAmazoncloudwatch
+                      size={80}
+                      className="text-orange-500 mb-4"
+                    />
+
+                    <h3 className="text-sm font-poppins font-semibold text-gray-700 text-center">
+                      We could not find what you were looking for
+                      <br /> Please try again
+                    </h3>
                   </div>
                 )}
               </div>
@@ -180,7 +171,6 @@ const SearchBooksPage = () => {
           </div>
         </div>
       </div>
-      {/* TODO: Add pagination */}
       <div className="container mx-auto px-6 py-4">
         <Pagination
           currentPage={currentPage}
