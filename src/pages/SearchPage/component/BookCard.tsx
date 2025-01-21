@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Book } from "../../../models/book";
 
 interface BookProps {
@@ -24,9 +25,12 @@ const BookCard = ({ book }: BookProps) => {
       <p className="text-gray-600 text-sm line-clamp-4 mb-4">
         {book.description}
       </p>
-      <a href="/" className="text-base font-medium hover:opacity-70">
+      <Link
+        to={`/checkout/${book.id}`}
+        className="text-base font-medium hover:opacity-70"
+      >
         View details
-      </a>
+      </Link>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { MdMenu, MdClose } from "react-icons/md";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { navVariants, menuVariants } from "../../../utils/animation";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -42,38 +43,52 @@ const NavBar = () => {
             <div className="hidden lg:block">
               <ul className="flex items-center gap-6 text-gray-600 font-poppins">
                 <li>
-                  <a
-                    href="/"
-                    className="inline-block text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-orange-500 font-semibold"
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      `inline-block text-sm xl:text-base py-1 px-2 xl:px-3 font-semibold ${
+                        isActive ? "text-orange-500" : "hover:text-orange-500"
+                      }`
+                    }
                   >
                     Home
-                  </a>
+                  </NavLink>
                 </li>
-
                 <li>
-                  <a
-                    href="/"
-                    className="inline-block text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-orange-500 font-semibold"
+                  <NavLink
+                    to="/search"
+                    className={({ isActive }) =>
+                      `inline-block text-sm xl:text-base py-1 px-2 xl:px-3 font-semibold ${
+                        isActive ? "text-orange-500" : "hover:text-orange-500"
+                      }`
+                    }
                   >
                     Explore
-                  </a>
+                  </NavLink>
                 </li>
-
                 <li>
-                  <a
-                    href="/"
-                    className="inline-block text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-orange-500 font-semibold"
+                  <NavLink
+                    to="/about"
+                    className={({ isActive }) =>
+                      `inline-block text-sm xl:text-base py-1 px-2 xl:px-3 font-semibold ${
+                        isActive ? "text-orange-500" : "hover:text-orange-500"
+                      }`
+                    }
                   >
                     About
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a
-                    href="/"
-                    className="inline-block text-sm xl:text-base py-1 px-2 xl:px-3 hover:text-orange-500 font-semibold"
+                  <NavLink
+                    to="/contact"
+                    className={({ isActive }) =>
+                      `inline-block text-sm xl:text-base py-1 px-2 xl:px-3 font-semibold ${
+                        isActive ? "text-orange-500" : "hover:text-orange-500"
+                      }`
+                    }
                   >
                     Contact
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>
