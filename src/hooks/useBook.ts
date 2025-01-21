@@ -1,6 +1,12 @@
 import { useQuery } from "react-query";
-import { getBooks, getBooksByCategory, getBooksByTitle } from "../api/bookApi";
+import {
+  getBookById,
+  getBooks,
+  getBooksByCategory,
+  getBooksByTitle,
+} from "../api/bookApi";
 import { BookResponse } from "../types/BookResponse";
+import { Book } from "../models/book";
 
 /**
  * Fetches a paginated list of books based on the current page and page size
@@ -12,6 +18,24 @@ export const useBooks = (currentPage: number, booksPerPage: number) => {
   return useQuery<BookResponse, Error>({
     queryKey: ["books", currentPage],
     queryFn: () => getBooks(currentPage, booksPerPage),
+  });
+};
+
+/**
+ * Fetches details of a single book by its id
+ * @param bookId The id of the book to retrieve
+ * @returns A Book object containing the book's details
+ */
+export const useBookById = (bookId: string | undefined) => {
+  return useQuery<Book, Error>({
+    queryKey: ["bookId", bookId],
+    queryFn: () => getBookById(bookId),
+    onError: (error: any) => {
+      console.error(
+        "Failed to fetch current loans count:",
+        error.response.data
+      );
+    },
   });
 };
 

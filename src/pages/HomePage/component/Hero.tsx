@@ -9,6 +9,7 @@ import {
 } from "../../../utils/animation";
 
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -34,7 +35,10 @@ const Hero = () => {
                 initial="hidden"
                 animate="visitable"
               >
-                <button className="relative flex items-center gap-2  px-5 py-3   rounded-2xl border border-orange-500 bg-orange-500 text-white text-base font-semibold shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-16 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-1000 hover:before:-translate-x-64 overflow-hidden 2xl:text-lg ">
+                <Link
+                  className="relative flex items-center gap-2  px-5 py-3   rounded-2xl border border-orange-500 bg-orange-500 text-white text-base font-semibold shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-16 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-1000 hover:before:-translate-x-64 overflow-hidden 2xl:text-lg "
+                  to={"/search"}
+                >
                   Explore Our Library
                   <motion.div
                     variants={heroIconBounceAnimation}
@@ -43,7 +47,7 @@ const Hero = () => {
                   >
                     <HiMiniArrowSmallRight className="size-8" />
                   </motion.div>
-                </button>
+                </Link>
               </motion.div>
             </div>
 

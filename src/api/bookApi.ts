@@ -1,3 +1,4 @@
+import { Book } from "../models/book";
 import { BookResponse } from "../types/BookResponse";
 import apiClient from "./axiosConfig";
 
@@ -13,6 +14,18 @@ export const getBooks = async (
 ): Promise<BookResponse> => {
   const response = await apiClient.get(`/books?page=${page}&size=${size}`);
 
+  return response.data;
+};
+
+/**
+ * Fetches details of a single book by its id
+ * @param bookId The id of the book to retrieve
+ * @returns A Book object containing the book's details
+ */
+export const getBookById = async (
+  bookId: string | undefined
+): Promise<Book> => {
+  const response = await apiClient.get(`/books/${bookId}`);
   return response.data;
 };
 
