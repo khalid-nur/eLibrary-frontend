@@ -3,6 +3,7 @@ import { motion } from "framer-motion"; // Add this import
 import { Link, useParams } from "react-router-dom";
 import { useBookById } from "../../hooks/useBook";
 import { PulseLoader } from "react-spinners";
+import StarsReview from "../../components/StarsReview";
 
 const BookCheckoutPage = () => {
   const [showReviews, setShowReviews] = useState(false);
@@ -38,13 +39,13 @@ const BookCheckoutPage = () => {
             <h1 className="text-2xl md:text-3xl font-poppins font-bold text-gray-800">
               {bookData?.title}
             </h1>
-            <p className="text-gray-600 mt-2">{bookData?.author}</p>
+            <p className="text-gray-600 mt-2 ">{bookData?.author}</p>
             <p className="text-gray-500 text-sm mt-1">
               {bookData?.copiesAvailable} out of {bookData?.copies} copies
               available
             </p>
 
-            {/* TODO: Add stars review  */}
+            <StarsReview rating={3.5} />
 
             <p className="text-gray-700 mt-6 line-clamp-5">
               {bookData?.description}
