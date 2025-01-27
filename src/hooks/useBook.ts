@@ -5,7 +5,7 @@ import {
   getBooksByCategory,
   getBooksByTitle,
 } from "../api/bookApi";
-import { BookResponse } from "../types/BookResponse";
+import { PaginatedResponse } from "../types/PaginatedResponse";
 import { Book } from "../models/book";
 
 /**
@@ -15,7 +15,7 @@ import { Book } from "../models/book";
  * @returns The query result containing books data, loading state, and error
  */
 export const useBooks = (currentPage: number, booksPerPage: number) => {
-  return useQuery<BookResponse, Error>({
+  return useQuery<PaginatedResponse<Book>, Error>({
     queryKey: ["books", currentPage],
     queryFn: () => getBooks(currentPage, booksPerPage),
   });
@@ -54,7 +54,7 @@ export const useSearch = (
   search: string,
   category: string
 ) => {
-  return useQuery<BookResponse, Error>({
+  return useQuery<PaginatedResponse<Book>, Error>({
     queryKey: ["bookSearch", currentPage, search, category],
     queryFn: async () => {
       if (category) {

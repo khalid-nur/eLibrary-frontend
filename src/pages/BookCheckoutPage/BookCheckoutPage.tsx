@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useBookById } from "../../hooks/useBook";
 import { PulseLoader } from "react-spinners";
 import StarsReview from "../../components/StarsReview";
+import LatestReviews from "./LatestReviews";
 
 const BookCheckoutPage = () => {
   const [showReviews, setShowReviews] = useState(false);
@@ -95,11 +96,7 @@ const BookCheckoutPage = () => {
               transition={{ duration: 0.4 }}
             >
               {showReviews ? (
-                <div>
-                  <h2 className="text-lg font-semibold text-gray-800 mb-4">
-                    Reviews
-                  </h2>
-                </div>
+                <LatestReviews bookId={bookData?.id} />
               ) : (
                 <div>
                   <h2 className="text-lg font-poppins font-semibold text-gray-800">
