@@ -1,5 +1,5 @@
 import { Book } from "../models/book";
-import { BookResponse } from "../types/BookResponse";
+import { PaginatedResponse } from "../types/PaginatedResponse";
 import apiClient from "./axiosConfig";
 
 /**
@@ -11,7 +11,7 @@ import apiClient from "./axiosConfig";
 export const getBooks = async (
   page: number,
   size: number
-): Promise<BookResponse> => {
+): Promise<PaginatedResponse<Book>> => {
   const response = await apiClient.get(`/books?page=${page}&size=${size}`);
 
   return response.data;
@@ -40,7 +40,7 @@ export const getBooksByTitle = async (
   title: string,
   page: number,
   size: number
-): Promise<BookResponse> => {
+): Promise<PaginatedResponse<Book>> => {
   const response = await apiClient.get(
     `/books/search?title=${title}&page=${page}&size=${size}`
   );
@@ -59,7 +59,7 @@ export const getBooksByCategory = async (
   page: number,
   size: number,
   category: string
-): Promise<BookResponse> => {
+): Promise<PaginatedResponse<Book>> => {
   const response = await apiClient.get(
     `/books/search/category?category=${category}&page=${page}&size=${size}`
   );
