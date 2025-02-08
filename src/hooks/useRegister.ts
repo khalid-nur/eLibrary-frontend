@@ -6,7 +6,7 @@ import {
 } from "../models/registerUser";
 
 /**
- * Handles user registration by sending user details to the backend API
+ * Handles user registration by sending users detail to the backend API
  * @returns The mutation result containing registration data, loading state, and error
  */
 export const useRegister = () => {

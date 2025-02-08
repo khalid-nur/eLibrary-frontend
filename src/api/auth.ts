@@ -7,7 +7,7 @@ import {
 /**
  * Registers a new user by sending their details to the backend API
  * @param data The registration details
- * @returns The response containing user details
+ * @returns The response containing user detail
  */
 export const registerUser = async (
   data: RegisterUserRequest

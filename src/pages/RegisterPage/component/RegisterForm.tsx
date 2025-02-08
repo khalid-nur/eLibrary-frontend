@@ -119,7 +119,7 @@ const RegisterForm = () => {
       <button
         type="submit"
         disabled={isLoading}
-        className="relative h-12 w-full overflow-hidden  rounded-2xl border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-[450px]  "
+        className="relative h-12 w-full overflow-hidden  rounded-2xl border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-[450px]"
       >
         {isLoading ? "Registering..." : "Register"}
       </button>
