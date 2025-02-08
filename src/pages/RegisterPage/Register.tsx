@@ -5,7 +5,7 @@ import SignupImage from "../../assets/signup-image.jpg";
 
 const Register = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white ">
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
         <div className="relative hidden md:flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
           <div className="absolute inset-0">
@@ -64,7 +64,7 @@ const Register = () => {
 
         <div className="flex items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24">
           <div className="xl:w-full max-w-md 2xl:max-w-md xl:mx-auto">
-            <h2 className="text-4xl font-poppins font-bold mb-4 leading-tight text-black ">
+            <h2 className="text-4xl font-poppins font-bold mb-4 leading-tight text-black">
               Create Your eLibrary Account
             </h2>
 

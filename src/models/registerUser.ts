@@ -1,5 +1,5 @@
 /**
- * Represents request for user registration
+ * Represents request for users registration
  */
 export interface RegisterUserRequest {
   name: string;
@@ -9,7 +9,7 @@ export interface RegisterUserRequest {
 }
 
 /**
- * Represents response for user registration
+ * Represents response for users registration
  */
 export interface RegisterUserResponse {
   userId: string;
