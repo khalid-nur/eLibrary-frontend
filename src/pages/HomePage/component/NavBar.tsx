@@ -3,7 +3,7 @@ import { MdMenu, MdClose } from "react-icons/md";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { navVariants, menuVariants } from "../../../utils/animation";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -95,13 +95,19 @@ const NavBar = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <button className=" hidden relative h-12 w-36 overflow-hidden  rounded-full border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40 lg:block">
+            <Link
+              to={"/login"}
+              className=" hidden relative  h-12 w-36 overflow-hidden  rounded-full border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40 lg:inline-flex lg:items-center lg:justify-center"
+            >
               Sign In
-            </button>
+            </Link>
 
-            <button className=" hidden relative h-12 w-36 overflow-hidden  rounded-full border-2 border-orange-400 bg-white  text-black shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-orange-500 before:opacity-10 before:duration-1000 hover:before:-translate-x-40 lg:block">
+            <Link
+              to={"/register"}
+              className=" hidden relative h-12 w-36 overflow-hidden  rounded-full border-2 border-orange-400 bg-white  text-black shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-orange-500 before:opacity-10 before:duration-1000 hover:before:-translate-x-40  lg:inline-flex lg:items-center lg:justify-center"
+            >
               Register
-            </button>
+            </Link>
           </div>
 
           {/* Mobile */}
@@ -121,44 +127,57 @@ const NavBar = () => {
         variants={menuVariants}
         className="fixed inset-x-0 top-24 bg-white z-40 shadow-lg lg:hidden"
       >
+        {/* // className={({ isActive }) => */}
         <div className="flex flex-col items-start py-6 px-4 space-y-4">
-          <a
-            href="/"
-            className="text-lg font-semibold text-gray-700 hover:text-orange-500"
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `text-lg font-semibold text-gray-700 hover:text-orange-500 ${
+                isActive ? "text-orange-500" : "hover:text-orange-500"
+              }`
+            }
+            onClick={() => setOpen(false)}
           >
             Home
-          </a>
-          <a
-            href="/"
-            className="text-lg font-semibold text-gray-700 hover:text-orange-500"
+          </NavLink>
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              `text-lg font-semibold text-gray-700 hover:text-orange-500 ${
+                isActive ? "text-orange-500" : "hover:text-orange-500"
+              }`
+            }
+            onClick={() => setOpen(false)}
           >
             Explore
-          </a>
-          <a
-            href="/"
+          </NavLink>
+          <NavLink
+            to="/about"
             className="text-lg font-semibold text-gray-700 hover:text-orange-500"
           >
             About
-          </a>
-          <a
-            href="/"
+          </NavLink>
+          <NavLink
+            to="/contact"
             className="text-lg font-semibold text-gray-700 hover:text-orange-500"
           >
             Contact
-          </a>
+          </NavLink>
 
-          <button
-            className="relative h-12 w-36 overflow-hidden  rounded-full border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40 "
+          <Link
+            to={"/login"}
+            className="relative inline-flex items-center justify-center h-12 w-36 overflow-hidden  rounded-full border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40 "
             onClick={() => setOpen(false)}
           >
             Sign In
-          </button>
-          <button
-            className="relative h-12 w-36 overflow-hidden  rounded-full border-2 border-orange-400 bg-white  text-black shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-orange-500 before:opacity-10 before:duration-1000 hover:before:-translate-x-40"
+          </Link>
+          <Link
+            to={"/register"}
+            className="relative inline-flex items-center justify-center h-12 w-36 overflow-hidden  rounded-full border-2 border-orange-400 bg-white  text-black shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-orange-500 before:opacity-10 before:duration-1000 hover:before:-translate-x-40"
             onClick={() => setOpen(false)}
           >
             Register
-          </button>
+          </Link>
         </div>
       </motion.div>
     </div>
