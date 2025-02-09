@@ -3,6 +3,7 @@ import ColleaguesImage from "../../../assets/university-colleagues-posing-univer
 import DotPatterns from "../../../assets/dots-pattern.svg";
 import { GiWorld } from "react-icons/gi";
 import { useCounter, titleVariants } from "../../../utils/animation";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   const { rounded, startAnimation } = useCounter();
@@ -80,9 +81,12 @@ const AboutUs = () => {
             </div>
 
             <div className="mt-4 md:mt-8">
-              <button className="relative h-12 w-36 overflow-hidden  rounded-2xl border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40  ">
+              <Link
+                to={"/register"}
+                className="relative inline-flex items-center justify-center h-12 w-36 overflow-hidden  rounded-2xl border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40  "
+              >
                 Sign Up
-              </button>
+              </Link>
             </div>
           </div>
         </div>
