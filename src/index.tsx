@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -14,9 +15,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <QueryClientProvider client={queryClient}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <AuthContextProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </AuthContextProvider>
   </QueryClientProvider>
 );
 
