@@ -19,6 +19,16 @@ export const menuVariants = {
   },
 };
 
+export const accountDropdownVariants = {
+  open: { opacity: 1, y: 0, display: "block", transition: { duration: 0.3 } },
+  closed: {
+    opacity: 0,
+    y: -10,
+    transitionEnd: { display: "none" },
+    transition: { duration: 0.3 },
+  },
+};
+
 // Hero Animations
 export const slideRight = {
   hidden: {
