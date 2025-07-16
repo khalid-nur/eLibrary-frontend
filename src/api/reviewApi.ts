@@ -20,3 +20,14 @@ export const getBookReviewById = async (
 
   return response.data;
 };
+
+/**
+ * Checks if a book has been reviewed by the authenticated user
+ *
+ * @param bookId The id of the book to check if it has been reviewed by the user
+ * @returns true if the book has been reviewed by the user, otherwise false
+ */
+export const isBookReviewedByUser = async (bookId: string | undefined) => {
+  const response = await apiClient.get(`/reviews/book/status?bookId=${bookId}`);
+  return response.data;
+};
