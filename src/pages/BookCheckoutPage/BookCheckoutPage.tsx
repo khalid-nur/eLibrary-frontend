@@ -3,8 +3,8 @@ import { motion } from "framer-motion"; // Add this import
 import { Link, useParams } from "react-router-dom";
 import { useBookById } from "../../hooks/useBook";
 import { PulseLoader } from "react-spinners";
-import StarsReview from "../../components/StarsReview";
 import LatestReviews from "./LatestReviews";
+import BookCheckoutCard from "./components/BookCheckoutCard";
 
 const BookCheckoutPage = () => {
   const [showReviews, setShowReviews] = useState(false);
@@ -36,36 +36,7 @@ const BookCheckoutPage = () => {
             />
           </div>
 
-          <div className="w-full md:w-1/2 mt-8 md:mt-0 md:ml-12">
-            <h1 className="text-2xl md:text-3xl font-poppins font-bold text-gray-800">
-              {bookData?.title}
-            </h1>
-            <p className="text-gray-600 mt-2 ">{bookData?.author}</p>
-            <p className="text-gray-500 text-sm mt-1">
-              {bookData?.copiesAvailable} out of {bookData?.copies} copies
-              available
-            </p>
-
-            <StarsReview rating={3.5} />
-
-            <p className="text-gray-700 mt-6 line-clamp-5">
-              {bookData?.description}
-            </p>
-
-            <div className="mt-4 md:mt-8">
-              <Link
-                to="/login"
-                className="relative h-12 w-36 flex items-center justify-center overflow-hidden rounded-2xl border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-full before:w-8 before:translate-x-16 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40"
-              >
-                Sign In
-              </Link>
-            </div>
-
-            <div className="border border-t-0 border-orange-400/30 my-4 "></div>
-            <p className="text-gray-500 mt-4">
-              Sign in to be able to leave a review
-            </p>
-          </div>
+          <BookCheckoutCard book={bookData} />
         </div>
 
         <div className="mt-12 pt-8 md:w-1/2">
