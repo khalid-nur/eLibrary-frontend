@@ -1,7 +1,11 @@
 import { useQuery } from "react-query";
 import { PaginatedResponse } from "../types/PaginatedResponse";
 import { Review } from "../models/review";
-import { getBookReviewById, isBookReviewedByUser } from "../api/reviewApi";
+import {
+  getAverageRatingByBookId,
+  getBookReviewById,
+  isBookReviewedByUser,
+} from "../api/reviewApi";
 
 /**
  * Fetches a paginated list of reviews for a specific book by its id
@@ -32,5 +36,18 @@ export const useIsBookReviewedByUser = (bookId: string | undefined) => {
   return useQuery<Boolean>({
     queryKey: ["bookReviewedByUser", bookId],
     queryFn: () => isBookReviewedByUser(bookId),
+  });
+};
+
+/**
+ * Fetches the average review rating of a specific book
+ *
+ * @param bookId The id of the book
+ * @returns The query result containing the average rating, loading state, and error
+ */
+export const useBookAverageRating = (bookId: string | undefined) => {
+  return useQuery<number>({
+    queryKey: ["averageRating", bookId],
+    queryFn: () => getAverageRatingByBookId(bookId),
   });
 };

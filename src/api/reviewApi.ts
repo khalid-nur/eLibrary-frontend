@@ -27,7 +27,24 @@ export const getBookReviewById = async (
  * @param bookId The id of the book to check if it has been reviewed by the user
  * @returns true if the book has been reviewed by the user, otherwise false
  */
-export const isBookReviewedByUser = async (bookId: string | undefined) => {
+export const isBookReviewedByUser = async (
+  bookId: string | undefined
+): Promise<boolean> => {
   const response = await apiClient.get(`/reviews/book/status?bookId=${bookId}`);
+  return response.data;
+};
+
+/**
+ * Fetches the average review rating for a book by its id
+ *
+ * @param bookId The id of the book
+ * @returns The average rating for the book, or 0.0 if no reviews exist
+ */
+export const getAverageRatingByBookId = async (
+  bookId: string | undefined
+): Promise<number> => {
+  const response = await apiClient.get(
+    `/reviews/book/${bookId}/average-rating`
+  );
   return response.data;
 };
