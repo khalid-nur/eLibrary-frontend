@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
 import StarsReview from "../../../components/StarsReview";
 import { Book } from "../../../models/book";
 import BookCheckoutButton from "./BookCheckoutButton";
 import BookReviewForm from "./BookReviewForm";
+import { useBookAverageRating } from "../../../hooks/useReview";
 
 interface BookCheckoutCardProps {
   book?: Book;
 }
 
 const BookCheckoutCard = ({ book }: BookCheckoutCardProps) => {
+  const { data: averageRating } = useBookAverageRating(book?.id);
+
   return (
     <div className="w-full md:w-1/2 mt-8 md:mt-0 md:ml-12">
       <h1 className="text-2xl md:text-3xl font-poppins font-bold text-gray-800">
@@ -19,7 +21,7 @@ const BookCheckoutCard = ({ book }: BookCheckoutCardProps) => {
         {book?.copiesAvailable} out of {book?.copies} copies available
       </p>
 
-      <StarsReview rating={3.5} />
+      <StarsReview rating={averageRating ?? 0.0} />
 
       <p className="text-gray-700 mt-6 line-clamp-5">{book?.description}</p>
 
