@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { useIsBookReviewedByUser } from "../../../hooks/useReview";
+import {
+  useIsBookReviewedByUser,
+  usePostReview,
+} from "../../../hooks/useReview";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { bookRatingOptions } from "../../../constants/bookRatingOptions";
+import { ReviewRequest } from "../../../types/reviewRequest";
+import { useForm } from "react-hook-form";
 
 interface BookReviewFormProps {
   bookId?: string;
@@ -12,17 +17,20 @@ interface BookReviewFormProps {
 const BookReviewForm = ({ bookId }: BookReviewFormProps) => {
   const { isAuthenticated } = useAuthContext();
   const { data: isReviewed } = useIsBookReviewedByUser(bookId);
-
-  const [reviewDescription, setReviewDescription] = useState("");
-  const [rating, setRating] = useState<number | null>(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const { register, handleSubmit, reset } = useForm<ReviewRequest>();
+  const { mutate: postReview, isLoading } = usePostReview();
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setRating(null);
-    setReviewDescription("");
-    setShowReviewForm(false);
+  const onSubmit = (data: ReviewRequest) => {
+    postReview(
+      { ...data, bookId: bookId || "" },
+      {
+        onSuccess: () => {
+          reset();
+          setShowReviewForm(false);
+        },
+      }
+    );
   };
 
   const openReviewForm = () => setShowReviewForm((prev) => !prev);
@@ -42,7 +50,7 @@ const BookReviewForm = ({ bookId }: BookReviewFormProps) => {
       )}
 
       {isAuthenticated && !isReviewed && bookId && (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <button
               type="button"
@@ -71,9 +79,8 @@ const BookReviewForm = ({ bookId }: BookReviewFormProps) => {
                   <div className="mb-4">
                     <label className="block text-gray-700 mb-2">Rating</label>
                     <select
-                      value={rating || ""}
-                      onChange={(e) => setRating(Number(e.target.value))}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-2 focus:border-orange-500 transition-all duration-200"
+                      {...register("rating", { required: true })}
                       required
                     >
                       <option value="">Select a rating</option>
@@ -95,10 +102,9 @@ const BookReviewForm = ({ bookId }: BookReviewFormProps) => {
                       Description
                     </label>
                     <textarea
-                      value={reviewDescription}
-                      onChange={(e) => setReviewDescription(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-2 focus:border-orange-500 transition-all duration-200"
-                      rows={4}
+                      {...register("description")}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md resize-none focus:outline-none focus:border-2 focus:border-orange-500 transition-all duration-200"
+                      rows={5}
                       placeholder="Optional"
                     />
                   </motion.div>
@@ -106,10 +112,11 @@ const BookReviewForm = ({ bookId }: BookReviewFormProps) => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    disabled={isLoading}
                     type="submit"
                     className="relative h-12 w-36 flex items-center justify-center overflow-hidden rounded-2xl border border-orange-500 bg-orange-500 text-white shadow-2xl transition-all before:absolute before:ease before:right-0 before:top-0 before:h-full before:w-8 before:translate-x-16 before:rotate-6 before:bg-white before:opacity-10 before:duration-700 hover:before:-translate-x-40"
                   >
-                    Submit
+                    {isLoading ? "Submitting..." : "Submit"}
                   </motion.button>
                 </motion.div>
               )}
