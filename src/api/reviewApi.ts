@@ -1,5 +1,6 @@
 import { Review } from "../models/review";
 import { PaginatedResponse } from "../types/PaginatedResponse";
+import { ReviewRequest } from "../types/reviewRequest";
 import apiClient from "./axiosConfig";
 
 /**
@@ -46,5 +47,16 @@ export const getAverageRatingByBookId = async (
   const response = await apiClient.get(
     `/reviews/book/${bookId}/average-rating`
   );
+  return response.data;
+};
+
+/**
+ * Submits a new review for a book
+ *
+ * @param reviewRequest The review request object holding the review details
+ * @returns A response with a 201 status when the review is successfully created
+ */
+export const postReview = async (reviewRequest: ReviewRequest) => {
+  const response = await apiClient.post(`/reviews`, reviewRequest);
   return response.data;
 };

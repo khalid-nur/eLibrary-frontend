@@ -1,11 +1,13 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { PaginatedResponse } from "../types/PaginatedResponse";
 import { Review } from "../models/review";
 import {
   getAverageRatingByBookId,
   getBookReviewById,
   isBookReviewedByUser,
+  postReview,
 } from "../api/reviewApi";
+import { ReviewRequest } from "../types/reviewRequest";
 
 /**
  * Fetches a paginated list of reviews for a specific book by its id
@@ -49,5 +51,24 @@ export const useBookAverageRating = (bookId: string | undefined) => {
   return useQuery<number>({
     queryKey: ["averageRating", bookId],
     queryFn: () => getAverageRatingByBookId(bookId),
+  });
+};
+
+/**
+ * Submits a new review for a book
+ *
+ * @returns A mutation object to post the review, including success and error handlers
+ */
+export const usePostReview = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["postreview"],
+    mutationFn: (reviewRequest: ReviewRequest) => postReview(reviewRequest),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["reviews"]); // Refresh all reviews
+      queryClient.invalidateQueries(["bookReviewedByUser"]); // Refresh the review status for the user
+      queryClient.invalidateQueries(["averageRating"]); // Refresh the average rating for the book
+    },
   });
 };
