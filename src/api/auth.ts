@@ -28,3 +28,13 @@ export const registerUser = async (
 export const login = (authRequest: AuthRequest) => {
   return apiClient.post<AuthResponse>("/auth/login", authRequest);
 };
+
+/**
+ * Logs out the currently authenticated user by calling the backend API
+ *
+ * @returns A response indicating the logout status
+ */
+export const logout = async () => {
+  const response = await apiClient.post("auth/logout");
+  return response.data;
+};

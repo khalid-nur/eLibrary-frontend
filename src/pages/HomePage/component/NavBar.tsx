@@ -12,12 +12,14 @@ import {
 } from "../../../utils/animation";
 import NavLinkItem from "./NavLinkItem";
 import { accountLinks, navLinks } from "../../../constants/navBarData";
+import { useLogout } from "../../../hooks/useLogout";
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const { isAuthenticated, user } = useAuthContext();
+  const { mutate: logout } = useLogout();
 
   const { scrollY } = useScroll();
 
@@ -151,7 +153,10 @@ const NavBar = () => {
                           Admin
                         </NavLink>
                       )}
-                      <button className="block text-left text-base font-medium text-red-500 hover:text-red-600">
+                      <button
+                        className="block text-left text-base font-medium text-red-500 hover:text-red-600"
+                        onClick={() => logout()}
+                      >
                         Logout
                       </button>
                     </div>
