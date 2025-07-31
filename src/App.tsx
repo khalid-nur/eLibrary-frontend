@@ -12,9 +12,10 @@ import Layout from "./pages/MainLayout";
 import Login from "./pages/LoginPage/Login";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { PulseLoader } from "react-spinners";
+import ReviewListPage from "./pages/ReviewPage/ReviewListPage";
 
 const App = () => {
-  const { isAuthenticated, isLoading, user } = useAuthContext();
+  const { isAuthenticated, isLoading } = useAuthContext();
 
   if (isLoading) {
     return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchBooksPage />} />
             <Route path="/checkout/:bookId" element={<BookCheckoutPage />} />
+            <Route path="/reviews/:bookId" element={<ReviewListPage />} />
           </Route>
           <Route
             path="/register"
