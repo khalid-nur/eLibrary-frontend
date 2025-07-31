@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { bookCategories } from "../../constants/SearchPageData";
 import { useSearch } from "../../hooks/useBook";
-import Pagination from "./Pagination";
+import Pagination from "../../components/Pagination";
 import { PulseLoader } from "react-spinners";
 import BookCard from "./component/BookCard";
 import { SiAmazoncloudwatch } from "react-icons/si";

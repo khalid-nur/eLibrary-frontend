@@ -44,7 +44,7 @@ const LatestReviews = ({ bookId }: LatestReviewsProps) => {
             <Link
               type="button"
               className="text-orange-500 font-medium"
-              to={`/`}
+              to={`/reviews/${bookId}`}
             >
               View all reviews
             </Link>
