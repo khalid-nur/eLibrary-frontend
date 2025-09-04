@@ -2,8 +2,10 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   checkoutBook,
   currentLoansCount,
+  getCheckoutCounts,
   isBookCheckedOutByUser,
 } from "../api/checkoutApi";
+import { CheckoutCounts } from "../models/checkout";
 
 /**
  * Fetches the number of books currently checked out by the authenticated user
@@ -48,5 +50,16 @@ export const useCheckOutBook = (bookId: string | undefined) => {
       queryClient.invalidateQueries(["isCheckedOut"]); // Refresh the checked out status of the book
       queryClient.invalidateQueries(["bookId"]); // Refresh the book details
     },
+  });
+};
+
+/**
+ * Fetches the total count of checkouts
+ * @returns The query result containing checkout counts, loading state, and error
+ */
+export const useCheckoutCount = () => {
+  return useQuery<CheckoutCounts, any>({
+    queryKey: ["checkouts-count"],
+    queryFn: getCheckoutCounts,
   });
 };

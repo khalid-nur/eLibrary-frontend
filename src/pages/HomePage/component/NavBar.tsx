@@ -140,7 +140,7 @@ const NavBar = () => {
                     <div className="border-t pt-3 mt-3">
                       {user.role === "ADMIN" && (
                         <NavLink
-                          to="/admin"
+                          to="/admin/dashboard/home"
                           className={({ isActive }) =>
                             `${
                               isActive

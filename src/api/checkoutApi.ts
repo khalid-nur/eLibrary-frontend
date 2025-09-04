@@ -1,3 +1,4 @@
+import { CheckoutCounts } from "../models/checkout";
 import apiClient from "./axiosConfig";
 
 /**
@@ -31,6 +32,16 @@ export const isBookCheckedOutByUser = async (
  */
 export const currentLoansCount = async (): Promise<number> => {
   const response = await apiClient.get("/checkouts/loan-count");
+
+  return response.data;
+};
+
+/**
+ * Fetches the total number of checkouts
+ * @returns the total count of checkouts
+ */
+export const getCheckoutCounts = async (): Promise<CheckoutCounts> => {
+  const response = await apiClient.get("/checkouts/admin/checkout-counts");
 
   return response.data;
 };
