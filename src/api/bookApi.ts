@@ -1,4 +1,4 @@
-import { Book } from "../models/book";
+import { Book, BookCounts } from "../models/book";
 import { PaginatedResponse } from "../types/PaginatedResponse";
 import apiClient from "./axiosConfig";
 
@@ -63,6 +63,16 @@ export const getBooksByCategory = async (
   const response = await apiClient.get(
     `/books/search/category?category=${category}&page=${page}&size=${size}`
   );
+
+  return response.data;
+};
+
+/**
+ * Fetches the total number of books
+ * @returns the total count of books
+ */
+export const getBookCounts = async (): Promise<BookCounts> => {
+  const response = await apiClient.get("/books/admin/book-counts");
 
   return response.data;
 };

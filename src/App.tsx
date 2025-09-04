@@ -13,9 +13,10 @@ import Login from "./pages/LoginPage/Login";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { PulseLoader } from "react-spinners";
 import ReviewListPage from "./pages/ReviewPage/ReviewListPage";
+import Dashboard from "./pages/AdminDashboard/Dashboard";
 
 const App = () => {
-  const { isAuthenticated, isLoading } = useAuthContext();
+  const { isAuthenticated, isLoading, user } = useAuthContext();
 
   if (isLoading) {
     return (
@@ -35,6 +36,18 @@ const App = () => {
             <Route path="/checkout/:bookId" element={<BookCheckoutPage />} />
             <Route path="/reviews/:bookId" element={<ReviewListPage />} />
           </Route>
+
+          <Route
+            path="/admin/dashboard/*"
+            element={
+              isAuthenticated && user?.role === "ADMIN" ? (
+                <Dashboard />
+              ) : (
+                <Navigate to={"/"} />
+              )
+            }
+          />
+
           <Route
             path="/register"
             element={!isAuthenticated ? <Register /> : <Navigate to={"/"} />}

@@ -11,3 +11,9 @@ export interface Book {
   category?: string;
   img?: string;
 }
+
+// Represents the count of books
+export interface BookCounts {
+  // Total number of books
+  totalBooks: number;
+}

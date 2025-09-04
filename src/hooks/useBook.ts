@@ -1,12 +1,13 @@
 import { useQuery } from "react-query";
 import {
   getBookById,
+  getBookCounts,
   getBooks,
   getBooksByCategory,
   getBooksByTitle,
 } from "../api/bookApi";
 import { PaginatedResponse } from "../types/PaginatedResponse";
-import { Book } from "../models/book";
+import { Book, BookCounts } from "../models/book";
 
 /**
  * Fetches a paginated list of books based on the current page and page size
@@ -15,8 +16,8 @@ import { Book } from "../models/book";
  * @returns The query result containing books data, loading state, and error
  */
 export const useBooks = (currentPage: number, booksPerPage: number) => {
-  return useQuery<PaginatedResponse<Book>, Error>({
-    queryKey: ["books", currentPage],
+  return useQuery<PaginatedResponse<Book>, any>({
+    queryKey: ["books", currentPage, booksPerPage],
     queryFn: () => getBooks(currentPage, booksPerPage),
   });
 };
@@ -27,7 +28,7 @@ export const useBooks = (currentPage: number, booksPerPage: number) => {
  * @returns A Book object containing the book's details
  */
 export const useBookById = (bookId: string | undefined) => {
-  return useQuery<Book, Error>({
+  return useQuery<Book, any>({
     queryKey: ["bookId", bookId],
     queryFn: () => getBookById(bookId),
     onError: (error: any) => {
@@ -54,7 +55,7 @@ export const useSearch = (
   search: string,
   category: string
 ) => {
-  return useQuery<PaginatedResponse<Book>, Error>({
+  return useQuery<PaginatedResponse<Book>, any>({
     queryKey: ["bookSearch", currentPage, search, category],
     queryFn: async () => {
       if (category) {
@@ -65,5 +66,16 @@ export const useSearch = (
         return await getBooksByTitle(search, currentPage, booksPerPage);
       }
     },
+  });
+};
+
+/**
+ * Fetches the total count of books
+ * @returns The query result containing book counts, loading state, and error
+ */
+export const useBookCount = () => {
+  return useQuery<BookCounts, any>({
+    queryKey: ["books-count"],
+    queryFn: getBookCounts,
   });
 };
