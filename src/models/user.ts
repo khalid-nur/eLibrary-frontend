@@ -17,3 +17,12 @@ export interface UserCounts {
   // Total number of registered users
   totalUsers: number;
 }
+
+/**
+ * Represents a admin request to update a user account
+ */
+export interface AdminUpdateUser {
+  name: string;
+  email: string;
+  role: string;
+}

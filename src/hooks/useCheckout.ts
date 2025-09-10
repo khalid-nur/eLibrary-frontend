@@ -3,9 +3,10 @@ import {
   checkoutBook,
   currentLoansCount,
   getCheckoutCounts,
+  getCheckoutCountsPerUser,
   isBookCheckedOutByUser,
 } from "../api/checkoutApi";
-import { CheckoutCounts } from "../models/checkout";
+import { TotalCheckouts, CheckoutPerUser } from "../models/checkout";
 
 /**
  * Fetches the number of books currently checked out by the authenticated user
@@ -58,8 +59,21 @@ export const useCheckOutBook = (bookId: string | undefined) => {
  * @returns The query result containing checkout counts, loading state, and error
  */
 export const useCheckoutCount = () => {
-  return useQuery<CheckoutCounts, any>({
+  return useQuery<TotalCheckouts, any>({
     queryKey: ["checkouts-count"],
     queryFn: getCheckoutCounts,
+  });
+};
+
+/**
+ * Fetches the number of checkouts per user
+ *
+ * @returns The query result containing a list of users alongside their checkout statistics,
+ *          loading state, and error
+ */
+export const useCheckoutCountsPerUser = () => {
+  return useQuery<CheckoutPerUser[], any>({
+    queryKey: ["checkouts-per-user"],
+    queryFn: getCheckoutCountsPerUser,
   });
 };

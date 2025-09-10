@@ -1,4 +1,4 @@
-import { CheckoutCounts } from "../models/checkout";
+import { TotalCheckouts, CheckoutPerUser } from "../models/checkout";
 import apiClient from "./axiosConfig";
 
 /**
@@ -18,9 +18,7 @@ export const checkoutBook = async (bookId: string | undefined) => {
  * @param bookId The id of the book to check
  * @returns true if the book is checked out by the user, otherwise false
  */
-export const isBookCheckedOutByUser = async (
-  bookId: string | undefined
-): Promise<boolean> => {
+export const isBookCheckedOutByUser = async (bookId: string | undefined): Promise<boolean> => {
   const response = await apiClient.get(`/checkouts/status?bookId=${bookId}`);
   return response.data;
 };
@@ -40,8 +38,18 @@ export const currentLoansCount = async (): Promise<number> => {
  * Fetches the total number of checkouts
  * @returns the total count of checkouts
  */
-export const getCheckoutCounts = async (): Promise<CheckoutCounts> => {
+export const getCheckoutCounts = async (): Promise<TotalCheckouts> => {
   const response = await apiClient.get("/checkouts/admin/checkout-counts");
 
+  return response.data;
+};
+
+/**
+ * Fetches the number of checkouts per user
+ *
+ * @returns A list of users alongside their checkout statistics
+ */
+export const getCheckoutCountsPerUser = async (): Promise<CheckoutPerUser[]> => {
+  const response = await apiClient.get("/checkouts/admin/checkout-counts-per-user");
   return response.data;
 };
