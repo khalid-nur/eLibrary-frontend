@@ -37,7 +37,7 @@ const Pagination = ({ currentPage, totalPages, paginate }: PaginationProps) => {
     }
   }
   return (
-    <nav className="flex items-center justify-center my-8 md:justify-end ">
+    <nav className="flex items-center justify-center my-2 md:justify-end ">
       <ul className="flex flex-wrap items-center justify-center space-x-2 overflow-hidden">
         <li>
           <button
@@ -61,9 +61,7 @@ const Pagination = ({ currentPage, totalPages, paginate }: PaginationProps) => {
               <button
                 onClick={() => paginate(pageNumber)}
                 className={`px-2  border rounded-md ${
-                  currentPage === pageNumber
-                    ? "bg-black text-white border-black"
-                    : "border-gray-300 hover:bg-gray-100"
+                  currentPage === pageNumber ? "bg-black text-white border-black" : "border-gray-300 hover:bg-gray-100"
                 }`}
               >
                 {pageNumber}
