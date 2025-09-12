@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import User from "./components/Users/User";
 import { useLogout } from "../../hooks/useLogout";
+import Books from "./components/Books/Books";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -27,6 +28,7 @@ const Dashboard = () => {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/users" element={<User />} />
+          <Route path="/books" element={<Books />} />
         </Routes>
       </div>
     </div>
