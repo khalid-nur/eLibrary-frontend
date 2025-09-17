@@ -1,4 +1,5 @@
-import { TotalCheckouts, CheckoutPerUser } from "../models/checkout";
+import { TotalCheckouts, CheckoutPerUser, LoanOverview } from "../models/checkout";
+import { PaginatedResponse } from "../types/PaginatedResponse";
 import apiClient from "./axiosConfig";
 
 /**
@@ -52,4 +53,36 @@ export const getCheckoutCounts = async (): Promise<TotalCheckouts> => {
 export const getCheckoutCountsPerUser = async (): Promise<CheckoutPerUser[]> => {
   const response = await apiClient.get("/checkouts/admin/checkout-counts-per-user");
   return response.data;
+};
+
+/**
+ * Fetches a list of all user checkouts
+ *
+ * @param page the page number to retrieve
+ * @param size the number of records per page
+ * @returns a paginated response containing user checkout details
+ */
+export const adminGetAllCheckouts = async (page: number, size: number): Promise<PaginatedResponse<LoanOverview>> => {
+  const response = await apiClient.get(`/checkouts/admin/all-checkouts?page=${page}&size=${size}`);
+  return response.data;
+};
+
+/**
+ * Renews a book loan for a user
+ *
+ * @param userId the id of the user
+ * @param bookId the id of the book to renew
+ */
+export const adminRenewBookLoanForUser = async (userId: string, bookId: string): Promise<void> => {
+  await apiClient.put(`/checkouts/admin/renew?userId=${userId}&bookId=${bookId}`);
+};
+
+/**
+ * Returns a book loan for a user
+ *
+ * @param userId the id of the user
+ * @param bookId the id of the book being returned
+ */
+export const adminReturnBookLoanForUser = async (userId: string, bookId: string): Promise<void> => {
+  await apiClient.put(`/checkouts/admin/return?userId=${userId}&bookId=${bookId}`);
 };

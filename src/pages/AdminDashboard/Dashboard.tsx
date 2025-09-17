@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import User from "./components/Users/User";
 import { useLogout } from "../../hooks/useLogout";
 import Books from "./components/Books/Books";
+import Checkouts from "./components/Checkouts/Checkouts";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,6 +30,7 @@ const Dashboard = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/users" element={<User />} />
           <Route path="/books" element={<Books />} />
+          <Route path="/checkouts" element={<Checkouts />} />
         </Routes>
       </div>
     </div>
