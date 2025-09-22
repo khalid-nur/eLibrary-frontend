@@ -1,5 +1,3 @@
-import { User } from "./user";
-
 /**
  * Represents a message object
  */
