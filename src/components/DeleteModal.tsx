@@ -10,7 +10,7 @@ interface DeleteModalProps {
 const DeleteModal = ({ title, message, onConfirm, onCancel }: DeleteModalProps) => {
   return (
     <div className="absolute w-full top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50">
-      <div className="absolute w-full top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50" onClick={onCancel} />
+      <div className="absolute w-full top-0 left-0 right-0 bottom-0 bg-transparent" onClick={onCancel} />
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

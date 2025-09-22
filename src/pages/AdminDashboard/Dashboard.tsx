@@ -6,6 +6,7 @@ import User from "./components/Users/User";
 import { useLogout } from "../../hooks/useLogout";
 import Books from "./components/Books/Books";
 import Checkouts from "./components/Checkouts/Checkouts";
+import Messages from "./components/Messages/Messages";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -31,6 +32,7 @@ const Dashboard = () => {
           <Route path="/users" element={<User />} />
           <Route path="/books" element={<Books />} />
           <Route path="/checkouts" element={<Checkouts />} />
+          <Route path="/messages" element={<Messages />} />
         </Routes>
       </div>
     </div>
