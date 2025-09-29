@@ -1,10 +1,5 @@
 import Home from "./pages/HomePage/Home";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import SearchBooksPage from "./pages/SearchPage/SearchBooksPage";
 import BookCheckoutPage from "./pages/BookCheckoutPage/BookCheckoutPage";
 import Register from "./pages/RegisterPage/Register";
@@ -14,6 +9,8 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import { PulseLoader } from "react-spinners";
 import ReviewListPage from "./pages/ReviewPage/ReviewListPage";
 import Dashboard from "./pages/AdminDashboard/Dashboard";
+import ForgotPassword from "./pages/ForgotPasswordPage/ForgotPassword";
+import ResetPassword from "./pages/ResetPasswordPage/ResetPasswordPage";
 
 const App = () => {
   const { isAuthenticated, isLoading, user } = useAuthContext();
@@ -39,23 +36,13 @@ const App = () => {
 
           <Route
             path="/admin/dashboard/*"
-            element={
-              isAuthenticated && user?.role === "ADMIN" ? (
-                <Dashboard />
-              ) : (
-                <Navigate to={"/"} />
-              )
-            }
+            element={isAuthenticated && user?.role === "ADMIN" ? <Dashboard /> : <Navigate to={"/"} />}
           />
 
-          <Route
-            path="/register"
-            element={!isAuthenticated ? <Register /> : <Navigate to={"/"} />}
-          />
-          <Route
-            path="/login"
-            element={!isAuthenticated ? <Login /> : <Navigate to={"/"} />}
-          />
+          <Route path="/register" element={!isAuthenticated ? <Register /> : <Navigate to={"/"} />} />
+          <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to={"/"} />} />
+          <Route path="/forgot-password" element={!isAuthenticated ? <ForgotPassword /> : <Navigate to={"/"} />} />
+          <Route path="/reset-password" element={!isAuthenticated ? <ResetPassword /> : <Navigate to={"/"} />} />
         </Routes>
       </Router>
     </div>
