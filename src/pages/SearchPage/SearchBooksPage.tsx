@@ -66,9 +66,7 @@ const SearchBooksPage = () => {
         <div className="mt-20 md:mt-28">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="md:col-span-1">
-              <h2 className="text-2xl font-poppins font-semibold mb-4">
-                Filter By
-              </h2>
+              <h2 className="text-2xl font-poppins font-semibold mb-4">Filter By</h2>
               <div className="mb-6">
                 <h3 className="text-lg font-poppins font-medium">Category</h3>
                 <div className="w-full border border-t-0 border-grey-300 my-2 xl:w-3/4"></div>
@@ -90,9 +88,7 @@ const SearchBooksPage = () => {
                           readOnly
                           className="peer appearance-none h-2 w-2 bg-gray-600 transition-all duration-300 checked:bg-orange-500 checked:rotate-45 hover:rotate-45 hover:bg-orange-500"
                         />
-                        <span className="peer-checked:text-orange-500">
-                          {category}
-                        </span>
+                        <span className="peer-checked:text-orange-500">{category}</span>
                       </label>
                     </li>
                   ))}
@@ -112,17 +108,12 @@ const SearchBooksPage = () => {
             </div>
 
             <div className="md:col-span-3">
-              <form
-                onSubmit={searchSubmitHandler}
-                className="flex justify-between items-center mb-8"
-              >
+              <form onSubmit={searchSubmitHandler} className="flex justify-between items-center mb-8">
                 <div className="flex items-center w-full border rounded-lg shadow-sm md:w-3/4 xl:w-2/3">
                   <input
                     type="text"
                     value={searchInput}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setSearchInput(e.target.value)
-                    }
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchInput(e.target.value)}
                     placeholder="Search..."
                     className="p-3 w-full rounded-l-lg text-gray-500 focus:outline-none"
                   />
@@ -137,28 +128,20 @@ const SearchBooksPage = () => {
 
               <p className="mb-6">
                 Result For
-                <span className="font-medium ml-1">
-                  "{searchInput || selectedCategory || "All"}"
-                </span>
+                <span className="font-medium ml-1">"{searchInput || selectedCategory || "All"}"</span>
               </p>
 
               <p className="text-gray-600 text-sm mb-4">
-                {indexOfFirstBook + 1} to {lastBookOnPage} of{" "}
-                {totalAmountOfBooks}
+                {indexOfFirstBook + 1} to {lastBookOnPage} of {totalAmountOfBooks}
                 <span> Book Found</span>
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {totalAmountOfBooks > 0 ? (
-                  bookData?.content.map((book) => (
-                    <BookCard key={book.id} book={book} />
-                  ))
+                  bookData?.content.map((book) => <BookCard key={book.id} book={book} />)
                 ) : (
                   <div className="flex flex-col items-center justify-center my-8 ">
-                    <SiAmazoncloudwatch
-                      size={80}
-                      className="text-orange-500 mb-4"
-                    />
+                    <SiAmazoncloudwatch size={80} className="text-orange-500 mb-4" />
 
                     <h3 className="text-sm font-poppins font-semibold text-gray-700 text-center">
                       We could not find what you were looking for
@@ -172,11 +155,7 @@ const SearchBooksPage = () => {
         </div>
       </div>
       <div className="container mx-auto px-6 py-4">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          paginate={paginate}
-        />
+        <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
       </div>
     </section>
   );
