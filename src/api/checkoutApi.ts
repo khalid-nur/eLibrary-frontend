@@ -1,4 +1,4 @@
-import { TotalCheckouts, CheckoutPerUser, LoanOverview } from "../models/checkout";
+import { TotalCheckouts, CheckoutPerUser, LoanOverview, Checkout } from "../models/checkout";
 import { PaginatedResponse } from "../types/PaginatedResponse";
 import apiClient from "./axiosConfig";
 
@@ -32,6 +32,38 @@ export const isBookCheckedOutByUser = async (bookId: string | undefined): Promis
 export const currentLoansCount = async (): Promise<number> => {
   const response = await apiClient.get("/checkouts/loan-count");
 
+  return response.data;
+};
+
+/**
+ * Fetches all books currently checked out by the authenticated user
+ *
+ * @returns A list of checkout details representing the user's current loans
+ */
+export const getUserCheckouts = async (): Promise<Checkout[]> => {
+  const response = await apiClient.get("/checkouts/current-loans");
+  return response.data;
+};
+
+/**
+ * Renews a book loan for the authenticated user
+ *
+ * @param bookId the id of the book to renew
+ * @returns confirmation that the book loan has been renewed
+ */
+export const renewUserBookLoan = async (bookId: string): Promise<void> => {
+  const response = await apiClient.put(`/checkouts/renew?bookId=${bookId}`);
+  return response.data;
+};
+
+/**
+ * Returns a book loan for the authenticated user
+ *
+ * @param bookId the id of the book to return
+ * @returns confirmation that the book loan has been returned
+ */
+export const returnUserBookLoan = async (bookId: string): Promise<void> => {
+  const response = await apiClient.put(`/checkouts/return?bookId=${bookId}`);
   return response.data;
 };
 

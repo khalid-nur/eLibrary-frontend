@@ -1,3 +1,5 @@
+import { Book } from "./book";
+
 // Represents the total number of all active checkouts
 export interface TotalCheckouts {
   totalCheckouts: number;
@@ -8,6 +10,14 @@ export interface CheckoutPerUser {
   userId: string;
   userEmail: string;
   checkoutCount: number;
+}
+
+/**
+ * Represents a book checkout for a user
+ */
+export interface Checkout {
+  book: Book;
+  daysLeft: number;
 }
 
 /**

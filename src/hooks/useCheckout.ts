@@ -8,8 +8,11 @@ import {
   getCheckoutCountsPerUser,
   adminGetAllCheckouts,
   isBookCheckedOutByUser,
+  getUserCheckouts,
+  renewUserBookLoan,
+  returnUserBookLoan,
 } from "../api/checkoutApi";
-import { TotalCheckouts, CheckoutPerUser, LoanOverview } from "../models/checkout";
+import { TotalCheckouts, CheckoutPerUser, LoanOverview, Checkout } from "../models/checkout";
 import { PaginatedResponse } from "../types/PaginatedResponse";
 
 /**
@@ -79,6 +82,50 @@ export const useCheckoutCountsPerUser = () => {
   return useQuery<CheckoutPerUser[], any>({
     queryKey: ["checkouts-per-user"],
     queryFn: getCheckoutCountsPerUser,
+  });
+};
+
+/**
+ * Fetches the list of books currently checked out by the authenticated user
+ *
+ * @returns The query result containing the user's current loans, loading state, and error
+ */
+export const useUserCheckouts = () => {
+  return useQuery<Checkout[], any>({
+    queryKey: ["user-checkouts"],
+    queryFn: getUserCheckouts,
+  });
+};
+
+/**
+ * Renew a book loan for the authenticated user
+ *
+ * @returns The mutation object including the mutate function, status, and error
+ */
+export const useRenewBookLoan = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (bookId: string) => renewUserBookLoan(bookId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["user-checkouts"]);
+    },
+  });
+};
+
+/**
+ * Return a book loan for the authenticated user
+ *
+ * @returns The mutation object including the mutate function, status, and error
+ */
+export const useReturnBookLoan = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (bookId: string) => returnUserBookLoan(bookId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["user-checkouts"]);
+    },
   });
 };
 
