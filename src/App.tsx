@@ -12,6 +12,7 @@ import Dashboard from "./pages/AdminDashboard/Dashboard";
 import ForgotPassword from "./pages/ForgotPasswordPage/ForgotPassword";
 import ResetPassword from "./pages/ResetPasswordPage/ResetPasswordPage";
 import MyBooks from "./pages/MyBooksPage/MyBooks";
+import HistoryPage from "./pages/HistoryPage/HistoryPage";
 
 const App = () => {
   const { isAuthenticated, isLoading, user } = useAuthContext();
@@ -33,7 +34,8 @@ const App = () => {
             <Route path="/search" element={<SearchBooksPage />} />
             <Route path="/checkout/:bookId" element={<BookCheckoutPage />} />
             <Route path="/reviews/:bookId" element={<ReviewListPage />} />
-            <Route path="/my-books" element={<MyBooks />} />
+            <Route path="/my-books" element={isAuthenticated ? <MyBooks /> : <Navigate to={"/"} />} />
+            <Route path="/reading-history" element={isAuthenticated ? <HistoryPage /> : <Navigate to={"/"} />} />
           </Route>
 
           <Route
