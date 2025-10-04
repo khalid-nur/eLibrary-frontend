@@ -13,6 +13,7 @@ import ForgotPassword from "./pages/ForgotPasswordPage/ForgotPassword";
 import ResetPassword from "./pages/ResetPasswordPage/ResetPasswordPage";
 import MyBooks from "./pages/MyBooksPage/MyBooks";
 import HistoryPage from "./pages/HistoryPage/HistoryPage";
+import MyProfile from "./pages/ProfilePage/MyProfile";
 
 const App = () => {
   const { isAuthenticated, isLoading, user } = useAuthContext();
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/reviews/:bookId" element={<ReviewListPage />} />
             <Route path="/my-books" element={isAuthenticated ? <MyBooks /> : <Navigate to={"/"} />} />
             <Route path="/reading-history" element={isAuthenticated ? <HistoryPage /> : <Navigate to={"/"} />} />
+            <Route path="/profile" element={isAuthenticated ? <MyProfile /> : <Navigate to={"/"} />} />
           </Route>
 
           <Route
