@@ -1,20 +1,17 @@
 import { useState } from "react";
-import { motion } from "framer-motion"; // Add this import
-import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
 import { useBookById } from "../../hooks/useBook";
 import { PulseLoader } from "react-spinners";
 import LatestReviews from "./LatestReviews";
 import BookCheckoutCard from "./components/BookCheckoutCard";
+import NotFoundPage from "../NotFoundPage";
 
 const BookCheckoutPage = () => {
   const [showReviews, setShowReviews] = useState(false);
 
   const { bookId } = useParams();
-  const {
-    data: bookData,
-    isLoading: isBookLoading,
-    error: bookError,
-  } = useBookById(bookId);
+  const { data: bookData, isLoading: isBookLoading, error: bookError, isError } = useBookById(bookId);
 
   if (isBookLoading) {
     return (
@@ -22,6 +19,10 @@ const BookCheckoutPage = () => {
         <PulseLoader size={12} />
       </div>
     );
+  }
+
+  if (isError || bookError) {
+    return <NotFoundPage message={bookError.response.data.message} linkTo="/search" linkText="Explore our Library" />;
   }
 
   return (
@@ -42,9 +43,7 @@ const BookCheckoutPage = () => {
         <div className="mt-12 pt-8 md:w-1/2">
           <div className="flex space-x-8 border-b pb-4">
             <button
-              className={`text-gray-800  ${
-                !showReviews && "border-b-2 border-gray-800 font-semibold"
-              }`}
+              className={`text-gray-800  ${!showReviews && "border-b-2 border-gray-800 font-semibold"}`}
               onClick={() => setShowReviews(false)}
             >
               Description
@@ -70,9 +69,7 @@ const BookCheckoutPage = () => {
                 <LatestReviews bookId={bookData?.id} />
               ) : (
                 <div>
-                  <h2 className="text-lg font-poppins font-semibold text-gray-800">
-                    Category: {bookData?.category}
-                  </h2>
+                  <h2 className="text-lg font-poppins font-semibold text-gray-800">Category: {bookData?.category}</h2>
                   <p className="text-gray-700 mt-4">{bookData?.description}</p>
                 </div>
               )}

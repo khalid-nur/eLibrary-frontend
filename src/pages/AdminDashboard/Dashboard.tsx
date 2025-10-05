@@ -7,6 +7,7 @@ import { useLogout } from "../../hooks/useLogout";
 import Books from "./components/Books/Books";
 import Checkouts from "./components/Checkouts/Checkouts";
 import Messages from "./components/Messages/Messages";
+import NotFoundPage from "../NotFoundPage";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,6 +34,17 @@ const Dashboard = () => {
           <Route path="/books" element={<Books />} />
           <Route path="/checkouts" element={<Checkouts />} />
           <Route path="/messages" element={<Messages />} />
+
+          <Route
+            path="*"
+            element={
+              <NotFoundPage
+                message="Oops! This dashboard section could not be found."
+                linkTo="/admin/dashboard/home"
+                linkText="Back to Dashboard Home"
+              />
+            }
+          />
         </Routes>
       </div>
     </div>
