@@ -1,12 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { PaginatedResponse } from "../types/PaginatedResponse";
 import { Review } from "../models/review";
-import {
-  getAverageRatingByBookId,
-  getBookReviewById,
-  isBookReviewedByUser,
-  postReview,
-} from "../api/reviewApi";
+import { getAverageRatingByBookId, getBookReviewById, isBookReviewedByUser, postReview } from "../api/reviewApi";
 import { ReviewRequest } from "../types/reviewRequest";
 
 /**
@@ -17,12 +12,8 @@ import { ReviewRequest } from "../types/reviewRequest";
  * @param booksPerPage The number of reviews per page
  * @returns The query result containing review data, loading state, and error
  */
-export const useBookReviewById = (
-  bookId: string | undefined,
-  currentPage: number,
-  booksPerPage: number
-) => {
-  return useQuery<PaginatedResponse<Review>, Error>({
+export const useBookReviewById = (bookId: string | undefined, currentPage: number, booksPerPage: number) => {
+  return useQuery<PaginatedResponse<Review>, any>({
     queryKey: ["reviews", bookId, currentPage],
     queryFn: () => getBookReviewById(bookId, currentPage, booksPerPage),
   });

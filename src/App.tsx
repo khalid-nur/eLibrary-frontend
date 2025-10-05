@@ -14,6 +14,7 @@ import ResetPassword from "./pages/ResetPasswordPage/ResetPasswordPage";
 import MyBooks from "./pages/MyBooksPage/MyBooks";
 import HistoryPage from "./pages/HistoryPage/HistoryPage";
 import MyProfile from "./pages/ProfilePage/MyProfile";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   const { isAuthenticated, isLoading, user } = useAuthContext();
@@ -49,6 +50,8 @@ const App = () => {
           <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to={"/"} />} />
           <Route path="/forgot-password" element={!isAuthenticated ? <ForgotPassword /> : <Navigate to={"/"} />} />
           <Route path="/reset-password" element={!isAuthenticated ? <ResetPassword /> : <Navigate to={"/"} />} />
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </div>

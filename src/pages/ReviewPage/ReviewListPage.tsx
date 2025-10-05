@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import StarsReview from "../../components/StarsReview";
-import { AiFillStar } from "react-icons/ai";
 import Pagination from "../../components/Pagination";
 import { useParams } from "react-router-dom";
 import { useBookAverageRating, useBookReviewById } from "../../hooks/useReview";
 import Reviews from "../../components/Reviews";
 import { PulseLoader } from "react-spinners";
+import NotFoundPage from "../NotFoundPage";
 
 const ReviewListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,11 +13,7 @@ const ReviewListPage = () => {
 
   const { bookId } = useParams();
 
-  const {
-    data: reviews,
-    isLoading,
-    error,
-  } = useBookReviewById(bookId, currentPage - 1, reviewsPerPage);
+  const { data: reviews, isLoading, error, isError } = useBookReviewById(bookId, currentPage - 1, reviewsPerPage);
   const { data: averageRating } = useBookAverageRating(bookId);
 
   const totalAmountOfReviews = reviews ? reviews.totalElements : 0;
@@ -33,6 +29,9 @@ const ReviewListPage = () => {
     );
   }
 
+  if (isError || error) {
+    return <NotFoundPage message={error.response.data.message} linkTo="/search" linkText="Explore our Library" />;
+  }
   return (
     <section className="bg-white min-h-screen flex flex-col">
       <div className="container mx-auto px-6 py-12 md:py-16 flex-grow">
@@ -45,9 +44,7 @@ const ReviewListPage = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-11 pb-5 max-xl:max-w-2xl max-xl:mx-auto">
                 <div className="flex flex-col gap-y-4 w-full">
                   <div className="p-7 rounded-3xl flex items-center justify-center flex-col">
-                    <h2 className="font-bold text-4xl text-center text-orange-500 mb-6 xl:text-5xl">
-                      Total Reviews
-                    </h2>
+                    <h2 className="font-bold text-4xl text-center text-orange-500 mb-6 xl:text-5xl">Total Reviews</h2>
                     <p className="font-medium text-xl leading-8 text-gray-600 text-center">
                       {totalAmountOfReviews} Reviews
                     </p>
@@ -55,13 +52,9 @@ const ReviewListPage = () => {
                 </div>
 
                 <div className="p-7 bg-wrapper rounded-3xl flex items-center justify-center flex-col">
-                  <h2 className="font-bold text-4xl text-center text-orange-500 mb-6 xl:text-5xl">
-                    Average Rating
-                  </h2>
+                  <h2 className="font-bold text-4xl text-center text-orange-500 mb-6 xl:text-5xl">Average Rating</h2>
                   <div className="flex items-center justify-center gap-2 sm:gap-6 mb-4">
-                    <p className="text-gray-600 text-2xl font-semibold">
-                      {averageRating}
-                    </p>
+                    <p className="text-gray-600 text-2xl font-semibold">{averageRating}</p>
                     <StarsReview rating={averageRating ?? 0.0} />
                   </div>
                 </div>
@@ -79,11 +72,7 @@ const ReviewListPage = () => {
               </div>
 
               <div className="container mx-auto px-6 py-4">
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  paginate={paginate}
-                />
+                <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
               </div>
             </div>
           </div>
