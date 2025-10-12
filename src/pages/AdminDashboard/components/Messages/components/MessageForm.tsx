@@ -28,7 +28,6 @@ const MessageForm = ({ onClose, message }: MessageFormProps) => {
   });
 
   const onSubmit = (response: AdminReplyRequest) => {
-    console.log(response);
     responseMessage(
       { messageId: message.id, replyRequest: response },
       {

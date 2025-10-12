@@ -17,7 +17,6 @@ const MyBooks = () => {
     if (!selectedAction || !selectedBook) return;
 
     if (selectedAction === "renew") {
-      console.log(selectedBook.book.id);
       renewBook(selectedBook.book.id, {
         onSuccess: () => {
           modalCloseHandler();
