@@ -28,15 +28,10 @@ const Checkouts = () => {
   const maxRenewals = 2;
   const isActionModalOpen = selectedAction !== null && selectedCheckout !== null;
 
-  console.log(checkoutData);
-  console.log(isActionModalOpen);
-  console.log("this is selected checkout ", selectedCheckout);
-
   const modalConfirmHandler = () => {
     if (!selectedAction || !selectedCheckout) return;
 
     if (selectedAction === "renew") {
-      console.log("Renewing", selectedCheckout);
       renewLoan(
         { userId: selectedCheckout.userId, bookId: selectedCheckout.bookId },
         {
@@ -49,7 +44,6 @@ const Checkouts = () => {
     }
 
     if (selectedAction === "return") {
-      console.log("Returning", selectedCheckout);
       returnLoan(
         { userId: selectedCheckout.userId, bookId: selectedCheckout.bookId },
         {
