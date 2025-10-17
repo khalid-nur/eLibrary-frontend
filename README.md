@@ -1,46 +1,82 @@
-# Getting Started with Create React App
+# eLibrary Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend for the eLibrary system, built with React and TypeScript.
 
-## Available Scripts
+## Main Features
 
-In the project directory, you can run:
+### For All Users
 
-### `npm start`
+- **Find Books:** Search the entire library by title or category.
+- **Book Details:** View detailed book information, including descriptions and reader reviews.
+- **Account Access:** Sign up, log in, and log out securely. Users can also reset their passwords through email.
+- **My Books:** View books currently checked out and quickly renew or return them.
+- **Reading History:** Review all previously checked out and returned books.
+- **Reviews:** Write and read reviews, and see the average rating for each book.
+- **Profile:** Access personal information and track current checkout status.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### For Admins
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Admins have access to a dedicated dashboard for managing users, books, and checkouts.
 
-### `npm test`
+- **Quick Stats:** View key library metrics such as total books, users, and checkouts.
+- **User Management:** Search, view, update, and delete user accounts.
+- **Book Management:** Add,edit, and remove books from the catalog.
+- **Checkout Management:** View all active checkouts and manually renew or return books.
+- **Messages:** Read, filter, and reply to user messages and requests.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+- **Framework:** React
+- **Language:** TypeScript
+- **Data Fetching:** React Query
+- **Routing:** React Router DOM
+- **Styling:** Tailwind CSS
+- **API Communication:** Axios
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## What You Need to Get Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Make sure you have the following installed:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Node.js](https://nodejs.org/)
+- npm
+- A running [eLibrary Backend API](https://github.com/khalid-nur/eLibrary-backend) (required for data connection)
 
-### `npm run eject`
+## Setup and Run
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Get the Code
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   git clone https://github.com/khalid-nur/eLibrary-frontend.git
+   cd eLibrary-frontend
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+2. Install Dependencies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Start the App
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```bash
+   npm start
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## Key Routes
+
+| Route Path           | Component              | Access | Description                 |
+| :------------------- | :--------------------- | :----- | :-------------------------- |
+| `/`                  | `Home.tsx`             | Public | Landing page                |
+| `/search`            | `SearchBooksPage.tsx`  | Public | Browse and search for books |
+| `/checkout/:bookId`  | `BookCheckoutPage.tsx` | Public | View book details           |
+| `/my-books`          | `MyBooks.tsx`          | User   | Manage current checkouts    |
+| `/reading-history`   | `HistoryPage.tsx`      | User   | View checkout history       |
+| `/profile`           | `MyProfile.tsx`        | User   | View and edit profile       |
+| `/login`             | `Login.tsx`            | Public | User login                  |
+| `/register`          | `Register.tsx`         | Public | User registration           |
+| `/admin/dashboard/*` | `Dashboard.tsx`        | Admin  | Admin control panel         |
+| `*`                  | `NotFoundPage.tsx`     | Public | Fallback for invalid routes |
+
+---
